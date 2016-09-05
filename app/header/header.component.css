@@ -1,0 +1,13 @@
+.logo {
+    text-align: center;
+    background: #FFF001;
+}
+
+.bg-inverse {
+    color: #000;
+    background-color: #35A5E7;
+}
+
+.navbar {
+    margin-bottom: 20px;
+}
