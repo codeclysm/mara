@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { AuthService } from './auth.service';
 import { CalendarService } from './calendar.service';
+import { AuthGuard } from './auth-guard.service';
 
 @NgModule({
   imports: [CommonModule],

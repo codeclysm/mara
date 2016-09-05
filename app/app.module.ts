@@ -9,11 +9,14 @@ import { CalendarComponent } from './+calendar/calendar.component';
 import { HeaderComponent } from './header/header.component';
 import { LoginComponent } from './+login/login.component';
 
+import { AuthGuard } from './core/auth-guard.service';
+
 import { routing } from './app.routing';
 
 @NgModule({
   imports:      [ BrowserModule, CoreModule, routing ],
-  declarations: [ AppComponent, AppointmentComponent, CalendarComponent, HeaderComponent, LoginComponent ],
-  bootstrap:    [ AppComponent ]
+  declarations: [AppComponent, AppointmentComponent, CalendarComponent, HeaderComponent, LoginComponent],
+  providers: [ AuthGuard ],
+  bootstrap: [ AppComponent ]
 })
 export class AppModule { }
