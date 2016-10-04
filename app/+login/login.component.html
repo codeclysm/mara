@@ -1,0 +1,19 @@
+<div class="row">
+    <div class="col-sm-6 offset-sm-3">
+        <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+            <fieldset class="form-group">
+                <label for="username">Username</label>
+                <input required type="text" class="form-control" id="login-username" placeholder="admin" [(ngModel)]="username" name="username">
+            </fieldset>
+            <fieldset class="form-group">
+                <label for="password">Password</label>
+                <input required type="password" class="form-control" id="login-password" placeholder="Password" [(ngModel)]="password" name="password">
+            </fieldset>
+
+            <div *ngIf="error" class="alert alert-danger" role="alert">
+                {{error}}
+            </div>
+            <button type="submit" class="btn btn-primary" [disabled]="!loginForm.form.valid">Submit</button>
+        </form>
+    </div>
+</div>

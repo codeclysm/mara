@@ -1,5 +1,7 @@
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule }   from '@angular/forms';
+import { HttpModule }    from '@angular/http';
 
 import { CoreModule } from './core/core.module';
 
@@ -14,7 +16,7 @@ import { AuthGuard } from './core/auth-guard.service';
 import { routing } from './app.routing';
 
 @NgModule({
-  imports:      [ BrowserModule, CoreModule, routing ],
+  imports:      [ BrowserModule, CoreModule, FormsModule, HttpModule, routing ],
   declarations: [AppComponent, AppointmentComponent, CalendarComponent, HeaderComponent, LoginComponent],
   providers: [ AuthGuard ],
   bootstrap: [ AppComponent ]

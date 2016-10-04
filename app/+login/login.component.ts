@@ -1,15 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { AuthService } from '../core/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'mara-login',
-  template: `login view`,
+  templateUrl: 'app/+login/login.component.html',
   styles: [``]
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
+  username = '';
+  password = '';
+  error = '';
 
-  constructor() {}
+  constructor(private auth: AuthService, private router: Router) {}
 
-  ngOnInit() {
+  onSubmit() {
+    this.auth.login(this.username, this.password)
+      .subscribe(() => {
+        this.router.navigate(['List'])
+      }, () => {
+        this.error = 'Il nome utente oppure la password sono sbagliati';
+      });
   }
 
 }
