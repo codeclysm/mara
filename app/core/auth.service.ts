@@ -11,9 +11,14 @@ export class AuthService {
 
   constructor(private http: Http) { };
 
+  logged(): boolean {
+    let token = sessionStorage.getItem('token');
+    return token !== '';
+  }
+
   login(username: string, password: string) {
-    let body = JSON.stringify({username: username, password: password})
-    return this.http.post('http://api.marabinigomme.it/login', body, new RequestOptions())
+    let body = JSON.stringify({user: username, password: password})
+    return this.http.post('http://api.marabinigomme.it/auth/login', body, new RequestOptions())
       .map(this.extractData)
       .catch(this.handleError);
   }

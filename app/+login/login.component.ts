@@ -17,7 +17,7 @@ export class LoginComponent {
   onSubmit() {
     this.auth.login(this.username, this.password)
       .subscribe(() => {
-        this.router.navigate(['List'])
+        this.router.navigate(['calendar']);
       }, () => {
         this.error = 'Il nome utente oppure la password sono sbagliati';
       });
