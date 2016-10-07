@@ -13,7 +13,7 @@ export class AuthService {
 
   logged(): boolean {
     let token = sessionStorage.getItem('token');
-    return token !== '';
+    return !!token;
   }
 
   login(username: string, password: string) {
