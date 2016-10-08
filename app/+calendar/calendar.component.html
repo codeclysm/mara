@@ -1,0 +1,31 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>Orario</th>
+        <th *ngFor="let day of week"
+            [class.today]="day.date==today"
+            [class.yesterday]="day.date==yesterday">
+          {{day.name}} - {{day.date}}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">Prima</th>
+      <td>Aggiungi</td>
+      <td>Aggiungi</td>
+      <td>Aggiungi</td>
+    </tr>
+    <tr>
+      <th scope="row">08:00</th>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td>@fat</td>
+    </tr>
+    <tr>
+      <th scope="row">08:30</th>
+      <td>Larry</td>
+      <td>the Bird</td>
+      <td>@twitter</td>
+    </tr>
+  </tbody>
+</table>
