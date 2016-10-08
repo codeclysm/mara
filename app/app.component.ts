@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
   selector: 'mara-app',
   template: `
   <mara-header></mara-header>
-  <router-outlet></router-outlet>
+  <div class="container"><router-outlet></router-outlet></div>
   `
 })
 export class AppComponent { }

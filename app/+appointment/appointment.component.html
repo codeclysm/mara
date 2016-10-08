@@ -1,0 +1,50 @@
+<div *ngIf="appointment">
+	<h1 *ngIf="appointment.id == ''">Nuovo appuntamento</h1>
+	<h1 *ngIf="appointment.id != ''">Modifica appuntamento</h1>
+
+	<form>
+		<!-- Who -->
+		<div class="form-group">
+			<label for="who">Cliente</label>
+			<input type="text" class="form-control" id="who">
+		</div>
+		
+		<div class="form-group row">
+			<!-- Email -->
+			<div class="col-xs-6">
+				<label for="email">Email</label>
+				<input type="text" class="form-control" id="email">
+			</div>
+			<!-- Telephone -->
+			<div class="col-xs-6">
+				<label for="email">Telefono</label>
+				<input type="text" class="form-control" id="email">
+			</div>
+		</div>
+
+		<div class="form-group row">
+			<!-- Send Email -->
+			<div class="col-xs-6">
+				<div class="form-check">
+					<label for="send_email" class="form-check-label">
+						<input class="form-check-input" type="checkbox" id="send_email"> Manda email
+					</label>
+				</div>
+			</div>
+			<!-- Send sms -->
+			<div class="col-xs-6">
+				<div class="form-check">
+					<label for="send_sms" class="form-check-label">
+						<input class="form-check-input" type="checkbox" id="send_sms"> Manda sms
+					</label>
+				</div>
+			</div>
+		</div>
+
+		<!-- What -->
+		<div class="form-group">
+			<label for="what">Operazione prenotata</label>
+			<input type="text" class="form-control" id="what">
+		</div>
+	</form>
+</div>
