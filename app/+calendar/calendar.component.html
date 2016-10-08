@@ -9,23 +9,8 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">Prima</th>
-      <td>Aggiungi</td>
-      <td>Aggiungi</td>
-      <td>Aggiungi</td>
-    </tr>
-    <tr>
-      <th scope="row">08:00</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">08:30</th>
-      <td>Larry</td>
-      <td>the Bird</td>
-      <td>@twitter</td>
+    <tr *ngFor="let time of calendar">
+      <th scope="row">{{time.label}}</th>
     </tr>
   </tbody>
 </table>

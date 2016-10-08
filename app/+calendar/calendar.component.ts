@@ -10,16 +10,12 @@ interface Appointment {
 }
 
 interface Time {
-
+  label: string;  // formatted as '07:30'
 }
 
 interface Day {
   date: string;  // Formatted as '20/12/2016'
   name: string;  // Formatted as 'Martedì'
-}
-
-interface Calendar {
-  times: Array<Time>;
 }
 
 @Component({
@@ -41,6 +37,9 @@ export class CalendarComponent implements OnInit {
   // week contains a list of the days in the current week
   public week: Array<Day> = [];
 
+  // calendar contains a table of appointments by time and date
+  public calendar: Array<Time> = [];
+
   // today and yesterday are used to highlight a day in the calendar view if it matches
   public today = Moment().format('DD/MM/YYYY');
   public yesterday = Moment().subtract(1, 'days').format('DD/MM/YYYY');
@@ -59,6 +58,15 @@ export class CalendarComponent implements OnInit {
         name: day.format('dddd'),
       };
     }
+
+    // Fill the calendar with dates and times
+    let morning = monday.clone().hour(7).minute(30);
+    this.calendar[0] = { label: 'Prima' };
+    for (let i = 1; i < 22; i++) {
+      let hour = morning.clone().add(30 * i, 'minutes');
+      this.calendar[i] = { label: hour.format('HH:mm') };
+    }
+
   }
 
 }
