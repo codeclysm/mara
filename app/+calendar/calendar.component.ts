@@ -11,6 +11,7 @@ interface Appointment {
 
 interface Time {
   label: string;  // formatted as '07:30'
+  days: Array<Day>;
 }
 
 interface Day {
@@ -61,10 +62,15 @@ export class CalendarComponent implements OnInit {
 
     // Fill the calendar with dates and times
     let morning = monday.clone().hour(7).minute(30);
-    this.calendar[0] = { label: 'Prima' };
-    for (let i = 1; i < 22; i++) {
+    for (let i = 0; i < 22; i++) {
       let hour = morning.clone().add(30 * i, 'minutes');
-      this.calendar[i] = { label: hour.format('HH:mm') };
+      this.calendar[i] = { label: hour.format('HH:mm'), days: [] };
+      for (let j in this.week) {
+        this.calendar[i].days[j] = {
+          date: this.week[j].date,
+          name: this.week[j].name,
+        };
+      }
     }
 
   }

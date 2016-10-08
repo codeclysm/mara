@@ -11,6 +11,10 @@
   <tbody>
     <tr *ngFor="let time of calendar">
       <th scope="row">{{time.label}}</th>
+      <th *ngFor="let day of time.days"
+          [class.today]="day.date==today"
+          [class.yesterday]="day.date==yesterday">
+        </th>
     </tr>
   </tbody>
 </table>
