@@ -26,7 +26,7 @@ export class AppointmentComponent implements OnInit {
   }
 
   submit() {
-    
+    this.calendar.save(this.appointment).subscribe();
   }
 
 }
