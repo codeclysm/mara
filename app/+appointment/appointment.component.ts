@@ -7,7 +7,11 @@ import { Appointment, CalendarService } from '../core/calendar.service';
 @Component({
   selector: 'mara-appointment',
   templateUrl: 'app/+appointment/appointment.component.html',
-  styles: [``]
+  styles: [`
+.pull-right {
+  text-align: right;
+}
+  `]
 })
 export class AppointmentComponent implements OnInit {
   public appointment: Appointment;
@@ -19,6 +23,10 @@ export class AppointmentComponent implements OnInit {
       let id: string = params['id'];
       this.calendar.get(id).then(appointment => this.appointment = appointment);
     });
+  }
+
+  submit() {
+    
   }
 
 }
