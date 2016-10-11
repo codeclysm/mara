@@ -46,5 +46,16 @@
 			<label for="what">Operazione prenotata</label>
 			<input type="text" class="form-control" id="what">
 		</div>
+
+		<!-- When -->
+		<div class="form-group">
+			<label for="when">Data e ora</label><br>
+			<input ng2-datetime-picker
+						 [(ngModel)]="appointment.when"
+						 id="when"
+						 name="when" 
+						 class="form-control"
+						 >
+		</div>
 	</form>
 </div>

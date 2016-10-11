@@ -10,4 +10,6 @@
         "typings": true,
         "app/**/*.js*/": true
     }
+,
+"typescript.tsdk": "./node_modules/typescript/lib"
 }
