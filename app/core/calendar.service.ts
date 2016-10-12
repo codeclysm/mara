@@ -1,3 +1,5 @@
+import 'rxjs/add/operator/toPromise';
+
 import { Observable } from 'rxjs/Observable';
 import { Injectable } from '@angular/core';
 import { Headers, Http, RequestOptions, Response } from '@angular/http';
@@ -22,6 +24,16 @@ export interface Appointment{
 @Injectable()
 export class CalendarService {
   constructor(private http: Http) { };
+
+  list(): Promise<Appointment[]> {
+    let token = sessionStorage.getItem('token');
+    let headers = new Headers();
+    headers.append('Authorization', 'Bearer ' + token);
+    return this.http.get('http://api.marabinigomme.it/appointments', new RequestOptions({ headers: headers }))
+      .toPromise()
+      .then(response => response.json() as Appointment[])
+      .catch(this.handleError);
+  }
 
   get(id: string): Promise<Appointment> {
     if (id === 'new') {
