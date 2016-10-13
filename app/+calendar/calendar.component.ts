@@ -6,6 +6,7 @@ import { Appointment, CalendarService } from '../core/calendar.service';
 
 interface Slot {
   date: string; // Formatted as '20/12/2016'
+  time: string;
   appointments: Appointment[];
 }
 
@@ -34,7 +35,7 @@ export class CalendarComponent implements OnInit {
   // today is used to highlight a day in the calendar view if it matches
   public today = Moment().format('DD/MM/YYYY');
 
-  // month, where, nextWeek and prevWeek are used for the title and the date selector  
+  // month, where, nextWeek and prevWeek are used for the title and the date selector
   public month: string;
   public where: string;
   public nextWeek: string;
@@ -81,7 +82,8 @@ export class CalendarComponent implements OnInit {
               }
             }
             this.calendar[i][j] = {
-              date: day.format('DD/MM/YYYY'),
+              date: begin.format('DD/MM/YYYY'),
+              time: begin.toISOString(),
               appointments: []
             };
 

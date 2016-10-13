@@ -29,7 +29,7 @@
           <a [routerLink]="['/appointment', appointment.id]" class="btn btn-sm btn-outline-primary">{{appointment.who}}</a>
         </div>
         <div>
-          <a routerLink="/appointment/new" href="#" role="button" class="btn btn-sm btn-secondary add">Aggiungi</a>
+          <a [routerLink]="['/appointment', 'new', {where: where, when: slot.time}]" href="#" role="button" class="btn btn-sm btn-secondary add">Aggiungi</a>
         </div>
         </td>
     </tr>

@@ -21,7 +21,15 @@ export class AppointmentComponent implements OnInit {
   ngOnInit() {
     this.route.params.forEach((params: Params) => {
       let id: string = params['id'];
-      this.calendar.get(id).then(appointment => this.appointment = appointment);
+      this.calendar.get(id).then((appointment: Appointment) => {
+        this.appointment = appointment;
+        if (params['where']) {
+          this.appointment.where = params['where'];
+        }
+        if (params['when']) {
+          this.appointment.when = params['when'];
+        }
+      });
     });
   }
 
