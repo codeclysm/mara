@@ -34,8 +34,9 @@ export class CalendarComponent implements OnInit {
   // today is used to highlight a day in the calendar view if it matches
   public today = Moment().format('DD/MM/YYYY');
 
-  // month, nextWeek and prevWeek are used for the title and the date selector  
+  // month, where, nextWeek and prevWeek are used for the title and the date selector  
   public month: string;
+  public where: string;
   public nextWeek: string;
   public prevWeek: string;
 
@@ -46,13 +47,14 @@ export class CalendarComponent implements OnInit {
     this.route.params.forEach((params: Params) => {
       let date = Moment(params['date']);
       this.month = date.format('MMMM');
-      this.prevWeek = date.clone().subtract(7, 'days').format('YYYY-MM-DD');
-      this.nextWeek = date.clone().add(7, 'days').format('YYYY-MM-DD');
+      this.where = params['where'];
 
-      this.service.list({date: params['date']}).then((appointments: Appointment[]) => {
-        // Find the days of the selected week
-        let monday = date.subtract(date.day() - 1, 'days');
+      // Find the days of the selected week
+      let monday = date.subtract(date.day() - 1, 'days');
+      this.prevWeek = monday.clone().subtract(7, 'days').format('YYYY-MM-DD');
+      this.nextWeek = monday.clone().add(7, 'days').format('YYYY-MM-DD');
 
+      this.service.list({where: this.where, date: monday}).then((appointments: Appointment[]) => {
         // Fill the calendar with dates and times
         this.calendar = [];
         for (let i = 0; i < 6; i++) {

@@ -24,7 +24,8 @@ export interface Appointment{
 }
 
 interface ListParams {
-  date: string;
+  where: string;
+  date: Moment.Moment;
 }
 
 @Injectable()
@@ -32,12 +33,11 @@ export class CalendarService {
   constructor(private http: Http) { };
 
   list(params: ListParams): Promise<Appointment[]> {
-    let url = 'http://api.marabinigomme.it/appointments';
+    let url = 'http://api.marabinigomme.it/appointments?where=' + params.where;
 
     if (params.date) {
-      let start = Moment(params.date);
-      let end = start.clone().add(6, 'days');
-      url = url + '?start=' + start.toISOString() + '&end=' + end.toISOString();
+      let end = params.date.clone().add(6, 'days');
+      url = url + '&start=' + params.date.toISOString() + '&end=' + end.toISOString();
     }
 
     let token = sessionStorage.getItem('token');
