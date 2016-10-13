@@ -48,53 +48,57 @@ export class CalendarComponent implements OnInit {
     // Ensure that the translation is correct
     Moment.locale('it', { weekdays: 'domenica_lunedì_martedì_mercoledì_giovedì_venerdì_sabato'.split('_') });
 
-    this.service.list().then((appointments: Appointment[]) => {
-      // Find the days of the selected week
-      let today = Moment();
-      let monday = today.subtract(today.day() - 1, 'days');
+    this.route.params.forEach((params: Params) => {
+      let date: string = params['date'];
+      let start = Moment(date);
 
-      // Fill the calendar with dates and times
-      for (let i = 0; i < 6; i++) {
-        this.calendar[i] = [];
+      this.service.list({date: date}).then((appointments: Appointment[]) => {
+        // Find the days of the selected week
+        let today = Moment();
+        let monday = start.subtract(start.day() - 1, 'days');
 
-        let day = monday.clone().add(i, 'days').hour(0).minute(0).second(0);
+        // Fill the calendar with dates and times
+        for (let i = 0; i < 6; i++) {
+          this.calendar[i] = [];
 
-        // Fill up the week array
-        this.week[i] = {
-          date: day.format('DD/MM/YYYY'),
-          name: day.format('dddd'),
-        };
+          let day = monday.clone().add(i, 'days').hour(0).minute(0).second(0);
 
-        let begin = day.clone();
-        for (let j = 0; j < 22; j++) {
-          // Fill up the hours array
-          if (i === 0) {
+          // Fill up the week array
+          this.week[i] = {
+            date: day.format('DD/MM/YYYY'),
+            name: day.format('dddd'),
+          };
+
+          let begin = day.clone();
+          for (let j = 0; j < 22; j++) {
+            // Fill up the hours array
+            if (i === 0) {
+              if (j === 0) {
+                this.hours.push('Prima');
+              } else if (j === 21) {
+                this.hours.push('Dopo');
+              } else {
+                this.hours.push(begin.format('HH:mm'));
+              }
+            }
+            this.calendar[i][j] = [];
+
+            let end = begin.clone().add(30, 'minutes');
             if (j === 0) {
-              this.hours.push('Prima');
-            } else if (j === 21) {
-              this.hours.push('Dopo');
-            } else {
-              this.hours.push(begin.format('HH:mm'));
+              end = begin.clone().hour(7).minute(30);
             }
-          }
-          this.calendar[i][j] = [];
-
-          let end = begin.clone().add(30, 'minutes');
-          if (j === 0) {
-            end = begin.clone().hour(7).minute(30);
-          }
-          for (let k in appointments) {
-            let when = Moment(appointments[k].when);
-            if (when.isBetween(begin, end)) {
-              this.calendar[i][j].push(appointments[k]);
+            for (let k in appointments) {
+              let when = Moment(appointments[k].when);
+              if (when.isBetween(begin, end)) {
+                this.calendar[i][j].push(appointments[k]);
+              }
             }
+            begin = end.clone();
           }
-          begin = end.clone();
         }
-      }
 
-      this.calendar = this.transpose(this.calendar);
-
+        this.calendar = this.transpose(this.calendar);
+      });
     });
 
   }

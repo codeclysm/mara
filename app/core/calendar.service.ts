@@ -1,5 +1,7 @@
 import 'rxjs/add/operator/toPromise';
 
+import * as Moment from 'moment';
+
 import { Observable } from 'rxjs/Observable';
 import { Injectable } from '@angular/core';
 import { Headers, Http, RequestOptions, Response } from '@angular/http';
@@ -21,15 +23,27 @@ export interface Appointment{
   status: string;
 }
 
+interface ListParams {
+  date: string;
+}
+
 @Injectable()
 export class CalendarService {
   constructor(private http: Http) { };
 
-  list(): Promise<Appointment[]> {
+  list(params: ListParams): Promise<Appointment[]> {
+    let url = 'http://api.marabinigomme.it/appointments';
+
+    if (params.date) {
+      let start = Moment(params.date);
+      let end = start.clone().add(6, 'days');
+      url = url + '?start=' + start.toISOString() + '&end=' + end.toISOString();
+    }
+
     let token = sessionStorage.getItem('token');
     let headers = new Headers();
     headers.append('Authorization', 'Bearer ' + token);
-    return this.http.get('http://api.marabinigomme.it/appointments', new RequestOptions({ headers: headers }))
+    return this.http.get(url, new RequestOptions({ headers: headers }))
       .toPromise()
       .then(response => response.json() as Appointment[])
       .catch(this.handleError);
