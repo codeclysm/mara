@@ -1,6 +1,7 @@
-import {AppComponent} from '../app.component';
+import { AppComponent } from '../app.component';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import * as Moment from 'moment';
 
 import { Appointment, CalendarService } from '../core/calendar.service';
 
@@ -29,6 +30,9 @@ export class AppointmentComponent implements OnInit {
         if (params['when']) {
           this.appointment.when = params['when'];
         }
+
+        // Fix an issue regarding timezone
+        this.appointment.when = Moment(this.appointment.when).local().format();
       });
     });
   }

@@ -83,7 +83,7 @@ export class CalendarComponent implements OnInit {
             }
             this.calendar[i][j] = {
               date: begin.format('DD/MM/YYYY'),
-              time: begin.toISOString(),
+              time: begin.format(),
               appointments: []
             };
 
@@ -93,7 +93,7 @@ export class CalendarComponent implements OnInit {
             }
             for (let k in appointments) {
               let when = Moment(appointments[k].when);
-              if (when.isBetween(begin, end)) {
+              if (when.isBetween(begin, end, 'minute', '[)')) {
                 this.calendar[i][j].appointments.push(appointments[k]);
               }
             }
