@@ -1,0 +1,15 @@
+thead .today {
+    background: #E8FFFF;
+}
+
+tbody .today {
+    background: #E8FFFF;
+}
+
+th, td {
+    text-align: center;
+}
+
+.pull-right {
+		text-align: right;
+}

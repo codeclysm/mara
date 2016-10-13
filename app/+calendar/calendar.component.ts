@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as Moment from 'moment';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 
 import { Appointment, CalendarService } from '../core/calendar.service';
 
@@ -12,21 +12,8 @@ interface Day {
 
 @Component({
   selector: 'mara-calendar',
-  templateUrl: `app/+calendar/calendar.component.html`,
-  styles: [`
-thead .today {
-    background: #E8FFFF;
-}
-
-tbody .today {
-    background: #E8FFFF;
-}
-
-th, td {
-    text-align: center;
-}
-
-  `]
+  templateUrl: 'app/+calendar/calendar.component.html',
+  styleUrls: ['app/+calendar/calendar.component.css']
 })
 export class CalendarComponent implements OnInit {
   constructor(private route: ActivatedRoute, private service: CalendarService) { }
@@ -44,20 +31,27 @@ export class CalendarComponent implements OnInit {
   public today = Moment().format('DD/MM/YYYY');
   public yesterday = Moment().subtract(1, 'days').format('DD/MM/YYYY');
 
+  // month, nextWeek and prevWeek are used for the title and the date selector  
+  public month: string;
+  public nextWeek: string;
+  public prevWeek: string;
+
   ngOnInit() {
     // Ensure that the translation is correct
-    Moment.locale('it', { weekdays: 'domenica_lunedì_martedì_mercoledì_giovedì_venerdì_sabato'.split('_') });
+    Moment.locale('it');
 
     this.route.params.forEach((params: Params) => {
-      let date: string = params['date'];
-      let start = Moment(date);
+      let date = Moment(params['date']);
+      this.month = date.format('MMMM');
+      this.prevWeek = date.clone().subtract(7, 'days').format('YYYY-MM-DD');
+      this.nextWeek = date.clone().add(7, 'days').format('YYYY-MM-DD');
 
-      this.service.list({date: date}).then((appointments: Appointment[]) => {
+      this.service.list({date: params['date']}).then((appointments: Appointment[]) => {
         // Find the days of the selected week
-        let today = Moment();
-        let monday = start.subtract(start.day() - 1, 'days');
+        let monday = date.subtract(date.day() - 1, 'days');
 
         // Fill the calendar with dates and times
+        this.calendar = [];
         for (let i = 0; i < 6; i++) {
           this.calendar[i] = [];
 

@@ -1,3 +1,16 @@
+<div class="row">
+  <div class="col-xs-6">
+    <h1>{{month | capitalize}}</h1>
+  </div>
+  <div class="col-xs-6 pull-right">
+    <div class="btn-group" role="group" aria-label="Basic example">
+      <a [routerLink]="['/calendar', prevWeek]" role="button" class="btn btn-secondary">&lt; &lt;</a>
+      <a [routerLink]="['/calendar']" role="button" class="btn btn-secondary">Oggi</a>
+      <a [routerLink]="['/calendar', nextWeek]" role="button" class="btn btn-secondary">&gt; &gt;</a>
+    </div>
+  </div>
+</div>
+
 <table class="table table-bordered">
   <thead>
     <tr>

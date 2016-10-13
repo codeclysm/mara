@@ -36,7 +36,7 @@
         defaultExtension: 'js'
       },
       moment: {
-        main: 'moment.min.js',
+        main: 'moment-with-locales.min.js',
         defaultExtension: 'js'
       },
       'ng2-datetime-picker': {

@@ -1,3 +1,4 @@
+import { CapitalizePipe } from './capitalize.pipe';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -7,6 +8,8 @@ import { AuthGuard } from './auth-guard.service';
 
 @NgModule({
   imports: [CommonModule],
-  providers: [AuthService, CalendarService]
+  providers: [AuthService, CalendarService],
+  declarations: [CapitalizePipe],
+  exports: [CapitalizePipe]
 })
 export class CoreModule{ }
