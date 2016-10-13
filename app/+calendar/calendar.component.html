@@ -15,10 +15,10 @@
           [class.today]="day.date==today"
           [class.yesterday]="day.date==yesterday">
         <div *ngFor="let appointment of day">
-          {{appointment.who}}
+          <a [routerLink]="['/appointment', appointment.id]">{{appointment.who}}</a>
         </div>
         <div>
-          <button class="btn btn-sm btn-default add">Aggiungi</button>
+          <a routerLink="/appointment/new" href="#" role="button" class="btn btn-sm btn-outline-primary add">Aggiungi</a>
         </div>
         </td>
     </tr>

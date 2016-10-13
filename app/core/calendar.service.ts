@@ -39,6 +39,13 @@ export class CalendarService {
     if (id === 'new') {
       return Promise.resolve(this.empty());
     }
+    let token = sessionStorage.getItem('token');
+    let headers = new Headers();
+    headers.append('Authorization', 'Bearer ' + token);
+    return this.http.get('http://api.marabinigomme.it/appointments/' + id, new RequestOptions({ headers: headers }))
+      .toPromise()
+      .then(response => response.json() as Appointment)
+      .catch(this.handleError);
   }
 
   save(app: Appointment): Observable<void> {
@@ -46,7 +53,16 @@ export class CalendarService {
     let token = sessionStorage.getItem('token');
     let headers = new Headers();
     headers.append('Authorization', 'Bearer ' + token);
-    return this.http.put('http://api.marabinigomme.it/appointments', body, new RequestOptions({headers: headers}))
+
+    let url = 'http://api.marabinigomme.it/appointments';
+    let method = 'put';
+
+    if (app.id) {
+      url = url + '/' + app.id;
+      method = 'post';
+    }
+
+    return this.http[method](url, body, new RequestOptions({headers: headers}))
       .map(this.extractData)
       .catch(this.handleError);
   }

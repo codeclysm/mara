@@ -26,14 +26,6 @@ th, td {
     text-align: center;
 }
 
-.add {
-    visibility: hidden;
-}
-
-td:hover .add {
-    visibility: visible;
-}
-
   `]
 })
 export class CalendarComponent implements OnInit {

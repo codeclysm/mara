@@ -1,6 +1,6 @@
 import {AppComponent} from '../app.component';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 import { Appointment, CalendarService } from '../core/calendar.service';
 
@@ -16,7 +16,7 @@ import { Appointment, CalendarService } from '../core/calendar.service';
 export class AppointmentComponent implements OnInit {
   public appointment: Appointment;
 
-  constructor(private route: ActivatedRoute, private calendar: CalendarService) {}
+  constructor(private route: ActivatedRoute, private router: Router, private calendar: CalendarService) {}
 
   ngOnInit() {
     this.route.params.forEach((params: Params) => {
@@ -26,7 +26,7 @@ export class AppointmentComponent implements OnInit {
   }
 
   submit() {
-    this.calendar.save(this.appointment).subscribe();
+    this.calendar.save(this.appointment).subscribe(res => this.router.navigate(['/calendar']));
   }
 
 }
