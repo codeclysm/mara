@@ -11,29 +11,35 @@
   </div>
 </div>
 
-<table class="table table-bordered">
+<table class="table table-striped">
   <thead>
     <tr>
       <th>Orario</th>
-        <th *ngFor="let day of week"
-            [class.today]="day.date==today"
-            [class.yesterday]="day.date==yesterday">
-          {{day.name}} - {{day.date}}</th>
+      <th *ngFor="let day of week"
+          [class.today]="day.date==today">
+        {{day.name}} - {{day.date}}</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let time of calendar; let i = index;">
+    <tr *ngFor="let times of calendar; let i = index;">
       <th scope="row">{{hours[i]}}</th>
-      <td *ngFor="let day of time"
-          [class.today]="day.date==today"
-          [class.yesterday]="day.date==yesterday">
-        <div *ngFor="let appointment of day">
-          <a [routerLink]="['/appointment', appointment.id]">{{appointment.who}}</a>
+      <td *ngFor="let slot of times"
+          [class.today]="slot.date==today">
+        <div *ngFor="let appointment of slot.appointments">
+          <a [routerLink]="['/appointment', appointment.id]" class="btn btn-sm btn-outline-primary">{{appointment.who}}</a>
         </div>
         <div>
-          <a routerLink="/appointment/new" href="#" role="button" class="btn btn-sm btn-outline-primary add">Aggiungi</a>
+          <a routerLink="/appointment/new" href="#" role="button" class="btn btn-sm btn-secondary add">Aggiungi</a>
         </div>
         </td>
     </tr>
   </tbody>
+  <tfoot>
+    <tr>
+      <th>Orario</th>
+      <th *ngFor="let day of week"
+          [class.today]="day.date==today">
+        {{day.name}} - {{day.date}}</th>
+    </tr>
+  </tfoot>
 </table>

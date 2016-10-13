@@ -1,9 +1,18 @@
 thead .today {
-    background: #E8FFFF;
+    border-top: 2px solid black;
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+}
+
+tfoot .today {
+    border-bottom: 2px solid black;
+    border-left: 2px solid black;
+    border-right: 2px solid black;
 }
 
 tbody .today {
-    background: #E8FFFF;
+    border-left: 2px solid black;
+    border-right: 2px solid black;
 }
 
 th, td {

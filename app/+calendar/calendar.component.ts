@@ -4,6 +4,10 @@ import { ActivatedRoute, Params } from '@angular/router';
 
 import { Appointment, CalendarService } from '../core/calendar.service';
 
+interface Slot {
+  date: string; // Formatted as '20/12/2016'
+  appointments: Appointment[];
+}
 
 interface Day {
   date: string;  // Formatted as '20/12/2016'
@@ -25,11 +29,10 @@ export class CalendarComponent implements OnInit {
   public hours: string[] = [];
 
   // calendar contains a table of appointments by time and date
-  public calendar: Appointment[][][] = [];
+  public calendar: Slot[][] = [];
 
-  // today and yesterday are used to highlight a day in the calendar view if it matches
+  // today is used to highlight a day in the calendar view if it matches
   public today = Moment().format('DD/MM/YYYY');
-  public yesterday = Moment().subtract(1, 'days').format('DD/MM/YYYY');
 
   // month, nextWeek and prevWeek are used for the title and the date selector  
   public month: string;
@@ -75,7 +78,10 @@ export class CalendarComponent implements OnInit {
                 this.hours.push(begin.format('HH:mm'));
               }
             }
-            this.calendar[i][j] = [];
+            this.calendar[i][j] = {
+              date: day.format('DD/MM/YYYY'),
+              appointments: []
+            };
 
             let end = begin.clone().add(30, 'minutes');
             if (j === 0) {
@@ -84,7 +90,7 @@ export class CalendarComponent implements OnInit {
             for (let k in appointments) {
               let when = Moment(appointments[k].when);
               if (when.isBetween(begin, end)) {
-                this.calendar[i][j].push(appointments[k]);
+                this.calendar[i][j].appointments.push(appointments[k]);
               }
             }
             begin = end.clone();
