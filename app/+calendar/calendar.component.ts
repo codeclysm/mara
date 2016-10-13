@@ -102,7 +102,6 @@ export class CalendarComponent implements OnInit {
       }
 
       this.calendar = this.transpose(this.calendar);
-      console.debug(this.hours)
 
     });
 
