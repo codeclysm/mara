@@ -26,13 +26,9 @@ th, td {
 /* Animation */
 @keyframes flasher {
     0% {
-        background-color: Yellow;
-        opacity:1;
+        background-color: #FFFFFF;
     }
-    22% {
-        background-color: Yellow;
-    }
-    77% {
+    30% {
         background-color: Yellow;
     }
     100% {
@@ -42,7 +38,7 @@ th, td {
 
 .cc-flasher{
     animation-name: flasher;
-    animation-duration: 500ms;
+    animation-duration: 1500ms;
     animation-iteration-count: 1;
     animation-timing-function: linear;
 }

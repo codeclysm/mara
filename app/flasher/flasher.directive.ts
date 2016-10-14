@@ -11,6 +11,9 @@ export class FlasherDirective implements OnChanges {
   ngOnChanges(changes: {[propKey: string]: SimpleChange}) {
     if (changes['start'] && changes['start'].currentValue) {
       this.renderer.setElementClass(this.el.nativeElement, 'cc-flasher', true);
+      window.setTimeout(() => {
+        this.renderer.setElementClass(this.el.nativeElement, 'cc-flasher', false);
+      }, 2000)
     }
   }
 
