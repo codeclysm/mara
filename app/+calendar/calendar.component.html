@@ -29,7 +29,12 @@
           <!-- Will flash once when it's the last updated -->
           <a [routerLink]="['/appointment', appointment.id]"
              [cc-flasher]="appointment.id == lastUpdated"
-              class="btn btn-sm btn-outline-primary">{{appointment.who}}</a>
+              class="appointment btn btn-sm btn-outline-primary">
+            <!-- Status icons -->
+            <i class="ion-android-time" *ngIf="appointment.status == 'todo'"></i>
+            <i class="ion-android-walk" *ngIf="appointment.status == 'doing'"></i>
+            <i class="ion-android-done" *ngIf="appointment.status == 'done'"></i>
+             {{appointment.who}}</a>
         </div>
         <div>
           <a [routerLink]="['/appointment', 'new', {where: where, when: slot.time}]" href="#" role="button" class="btn btn-sm btn-secondary add">Aggiungi</a>

@@ -1,3 +1,4 @@
+/* Table */
 thead .today {
     border-top: 2px solid black;
     border-left: 2px solid black;
@@ -20,7 +21,12 @@ th, td {
 }
 
 .pull-right {
-		text-align: right;
+	text-align: right;
+}
+
+/* Appointment */
+a.btn {
+    margin: 2px 0;
 }
 
 /* Animation */
