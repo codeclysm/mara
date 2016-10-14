@@ -3,13 +3,31 @@
 	<h1 *ngIf="appointment.id != ''">Modifica appuntamento</h1>
 
 	<form (ngSubmit)="submit()" #ngForm="ngForm">
-		<!-- Who -->
-		<div class="form-group">
-			<label for="who">Cliente</label>
-			<input type="text" class="form-control"
-						 id="who" name="who"
-						 required
-						 [(ngModel)]="appointment.who">
+		<div class="form-group row">
+			<!-- Who -->
+			<div class="form-group col-xs-6">
+				<label for="who">Cliente</label>
+				<input type="text" class="form-control"
+							id="who" name="who"
+							required
+							[(ngModel)]="appointment.who">
+			</div>
+
+			<!-- Status -->
+			<div class="form-group col-xs-6 status">
+				<label for="status">Stato del lavoro</label>
+				<div class="btn-group" role="group" aria-label="Basic example">
+					<button type="button" class="btn btn-secondary" title="Da fare"
+									(click)="setStatus('todo')"
+									[class.active]="appointment.status == 'todo'"><i class="ion-android-time"></i></button>
+					<button type="button" class="btn btn-secondary" title="In corso"
+									(click)="setStatus('doing')"
+									[class.active]="appointment.status == 'doing'"><i class="ion-android-walk"></i></button>
+					<button type="button" class="btn btn-secondary" title="Finito"
+									(click)="setStatus('done')"
+									[class.active]="appointment.status == 'done'"><i class="ion-android-done"></i></button>
+				</div>
+			</div>
 		</div>
 
 		<div class="form-group row">
