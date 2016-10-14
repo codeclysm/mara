@@ -34,6 +34,9 @@
             <i class="ion-android-time" *ngIf="appointment.status == 'todo'"></i>
             <i class="ion-android-walk" *ngIf="appointment.status == 'doing'"></i>
             <i class="ion-android-done" *ngIf="appointment.status == 'done'"></i>
+            <!-- Options icons -->
+            <i class="ion-android-pin" *ngIf="appointment.urgent"></i>
+            <i class="ion-android-alert" *ngIf="appointment.problematic"></i>
              {{appointment.who}}</a>
         </div>
         <div>

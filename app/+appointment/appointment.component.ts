@@ -37,11 +37,19 @@ export class AppointmentComponent implements OnInit {
     this.appointment.status = status;
   }
 
+  toggle(property: string) {
+    this.appointment[property] = !this.appointment[property];
+  }
+
   submit() {
     this.calendar.save(this.appointment).subscribe((res: Appointment) => {
       this.calendar.lastUpdated = res.id;
       this.router.navigate(['/calendar']);
     });
-}
+  }
+
+  back() {
+    this.router.navigate(['/calendar']);
+  }
 
 }

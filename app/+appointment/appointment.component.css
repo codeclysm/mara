@@ -14,6 +14,6 @@
     display: block;
 }
 
-.status .btn {
+.status .btn, .options .btn {
     padding: .6rem 1rem;
 }

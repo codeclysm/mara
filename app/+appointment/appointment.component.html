@@ -2,7 +2,7 @@
 	<h1 *ngIf="appointment.id == ''">Nuovo appuntamento</h1>
 	<h1 *ngIf="appointment.id != ''">Modifica appuntamento</h1>
 
-	<form (ngSubmit)="submit()" #ngForm="ngForm">
+	<form method="post" (ngSubmit)="submit()" #ngForm="ngForm">
 		<div class="form-group row">
 			<!-- Who -->
 			<div class="form-group col-xs-6">
@@ -14,9 +14,9 @@
 			</div>
 
 			<!-- Status -->
-			<div class="form-group col-xs-6 status">
+			<div class="form-group col-xs-2 status">
 				<label for="status">Stato del lavoro</label>
-				<div class="btn-group" role="group" aria-label="Basic example">
+				<div class="btn-group" role="group" aria-label="Status">
 					<button type="button" class="btn btn-secondary" title="Da fare"
 									(click)="setStatus('todo')"
 									[class.active]="appointment.status == 'todo'"><i class="ion-android-time"></i></button>
@@ -28,6 +28,20 @@
 									[class.active]="appointment.status == 'done'"><i class="ion-android-done"></i></button>
 				</div>
 			</div>
+
+			<!-- Options -->
+			<div class="form-group col-xs-3 options">
+				<label for="status">Opzioni</label>
+				<div>
+					<button type="button" class="btn btn-secondary" title="Urgente"
+									(click)="toggle('urgent')"
+									[class.active]="appointment.urgent"><i class="ion-android-pin"></i></button>
+					<button type="button" class="btn btn-secondary" title="Problematico"
+									(click)="toggle('problematic')"
+									[class.active]="appointment.problematic"><i class="ion-android-alert"></i></button>
+				</div>
+			</div>
+
 		</div>
 
 		<div class="form-group row">
@@ -112,10 +126,11 @@
 		<!-- Buttons -->
 		<div class="form-group row">
 			<div class="col-xs-6">
-				<button class="btn btn-danger">Cancella</button>
+				<button class="btn btn-danger" (click)="back()">Cancella</button>
 			</div>
 			<div class="col-xs-6 pull-right">
-				<button class="btn btn-primary" [disabled]="!ngForm.form.valid">Crea</button>
+				<button class="btn btn-primary" *ngIf="appointment.id==''" [disabled]="!ngForm.form.valid">Crea</button>
+				<button class="btn btn-primary" *ngIf="appointment.id!=''" [disabled]="!ngForm.form.valid">Modifica</button>
 			</div>
 		</div>
 
