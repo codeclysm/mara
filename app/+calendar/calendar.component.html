@@ -40,7 +40,10 @@
              {{appointment.who}}</a>
         </div>
         <div>
-          <a [routerLink]="['/appointment', 'new', {where: where, when: slot.time}]" href="#" role="button" class="btn btn-sm btn-secondary add">Aggiungi</a>
+          <a href="#" role="button" class="btn btn-sm btn-secondary add"
+            [routerLink]="['/appointment', 'new', {where: where, when: slot.time, n: slot.appointments.length}]"
+            *ngIf="slot.appointments.length < 4"
+             >Aggiungi</a>
         </div>
         </td>
     </tr>

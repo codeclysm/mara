@@ -12,11 +12,17 @@ import { Appointment, CalendarService } from '../core/calendar.service';
 })
 export class AppointmentComponent implements OnInit {
   public appointment: Appointment;
+  public warning: string;
 
   constructor(private route: ActivatedRoute, private router: Router, private calendar: CalendarService) { }
 
   ngOnInit() {
     this.route.params.forEach((params: Params) => {
+      // Check number of appointments in slot
+      if (params['n'] && params['n'] >= 3) {
+        this.warning = 'Attenzione: 4° appuntamento in questo slot';
+      }
+
       let id: string = params['id'];
       this.calendar.get(id).then((appointment: Appointment) => {
         this.appointment = appointment;

@@ -2,6 +2,10 @@
 	<h1 *ngIf="appointment.id == ''">Nuovo appuntamento</h1>
 	<h1 *ngIf="appointment.id != ''">Modifica appuntamento</h1>
 
+	<div class="alert alert-warning" role="alert" *ngIf="this.warning">
+		{{this.warning}}
+	</div>
+
 	<form method="post" (ngSubmit)="submit()" #ngForm="ngForm">
 		<div class="form-group row">
 			<!-- Who -->
