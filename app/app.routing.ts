@@ -8,7 +8,7 @@ import { LoginComponent } from './+login/login.component';
 import { AuthGuard } from './core/auth-guard.service';
 
 const appRoutes: Routes = [
-  { path: '', redirectTo: '/calendar', pathMatch: 'full' },
+  { path: '', redirectTo: '/calendar/budrio', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'calendar', redirectTo: '/calendar/budrio', pathMatch: 'full' },
   { path: 'calendar/:where', component: CalendarComponent, canActivate: [AuthGuard] },
