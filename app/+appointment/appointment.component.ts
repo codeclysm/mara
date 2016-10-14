@@ -48,6 +48,7 @@ export class AppointmentComponent implements OnInit {
   }
 
   submit() {
+    console.debug("hallo")
     this.calendar.save(this.appointment).subscribe((res: Appointment) => {
       this.calendar.lastUpdated = res.id;
       this.router.navigate(['/calendar']);

@@ -6,7 +6,7 @@
 		{{this.warning}}
 	</div>
 
-	<form method="post" (ngSubmit)="submit()" #ngForm="ngForm">
+	<form #ngForm="ngForm" novalidate>
 		<div class="form-group row">
 			<!-- Who -->
 			<div class="form-group col-xs-6">
@@ -130,13 +130,35 @@
 		<!-- Buttons -->
 		<div class="form-group row">
 			<div class="col-xs-6">
-				<button class="btn btn-danger" (click)="delete()">Cancella</button>
+				<button class="btn btn-danger" *ngIf="appointment.id!=''" (click)="deleteModal.show()">Cancella</button>
 			</div>
 			<div class="col-xs-6 pull-right">
-				<button class="btn btn-primary" *ngIf="appointment.id==''" [disabled]="!ngForm.form.valid">Crea</button>
-				<button class="btn btn-primary" *ngIf="appointment.id!=''" [disabled]="!ngForm.form.valid">Modifica</button>
+				<input type="submit" class="btn btn-primary" *ngIf="appointment.id==''" [disabled]="!ngForm.form.valid" value="Crea" (click)="submit()">
+				<input type="submit" class="btn btn-primary" *ngIf="appointment.id!=''" [disabled]="!ngForm.form.valid" value="Modifica" (click)="submit()">
 			</div>
 		</div>
-
 	</form>
+
+	<!-- Delete modal -->
+	<div class="modal fade" bsModal #deleteModal="bs-modal" [config]="{backdrop: 'static'}"
+			tabindex="-1" role="dialog" aria-labelledby="Conferma cancellazione" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" aria-label="Close" (click)="deleteModal.hide()">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title">Cancellare l'appuntamento di {{appointment.who}}? </h4>
+				</div>
+				<div class="modal-body">
+					Sei sicuro? Questa operazione non può essere annullata.
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-secondary" (click)="deleteModal.hide()">No</button>
+					<button class="btn btn-danger" (click)="delete()">Sì</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
 </div>

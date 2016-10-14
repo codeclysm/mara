@@ -4,7 +4,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule }   from '@angular/forms';
 import { HttpModule }    from '@angular/http';
 
- import { Ng2DatetimePickerModule } from 'ng2-datetime-picker';
+import { Ng2DatetimePickerModule } from 'ng2-datetime-picker';
+import { ModalModule } from 'ng2-bootstrap/components/modal';
 
 import { CoreModule } from './core/core.module';
 import { FlasherModule } from './flasher/flasher.module';
@@ -26,6 +27,7 @@ import { routing } from './app.routing';
     FlasherModule,
     FormsModule,
     HttpModule,
+    ModalModule,
     Ng2DatetimePickerModule,
     routing
   ],
