@@ -2,27 +2,29 @@
 	<h1 *ngIf="appointment.id == ''">Nuovo appuntamento</h1>
 	<h1 *ngIf="appointment.id != ''">Modifica appuntamento</h1>
 
-	<form>
+	<form (ngSubmit)="submit()" #ngForm="ngForm">
 		<!-- Who -->
 		<div class="form-group">
 			<label for="who">Cliente</label>
-			<input type="text" class="form-control" 
+			<input type="text" class="form-control"
 						 id="who" name="who"
+						 required
 						 [(ngModel)]="appointment.who">
 		</div>
-		
+
 		<div class="form-group row">
 			<!-- Email -->
 			<div class="col-xs-6">
 				<label for="email">Email</label>
-				<input type="text" class="form-control" 
+				<input type="text" class="form-control"
 							 id="email" name="email"
+							 required
 							 [(ngModel)]="appointment.email">
 			</div>
 			<!-- Telephone -->
 			<div class="col-xs-6">
 				<label for="telephone">Telefono</label>
-				<input type="text" class="form-control" 
+				<input type="text" class="form-control"
 							 id="telephone" name="telephone"
 							 [(ngModel)]="appointment.telephone">
 			</div>
@@ -33,7 +35,7 @@
 			<div class="col-xs-6">
 				<div class="form-check">
 					<label for="send_email" class="form-check-label">
-						<input class="form-check-input" type="checkbox" 
+						<input class="form-check-input" type="checkbox"
 									 id="send_email" name="send_email"
 									 [(ngModel)]="appointment.send_email"> Manda email
 					</label>
@@ -43,7 +45,7 @@
 			<div class="col-xs-6">
 				<div class="form-check">
 					<label for="send_sms" class="form-check-label">
-						<input class="form-check-input" type="checkbox" 
+						<input class="form-check-input" type="checkbox"
 									 id="send_sms" name="send_sms"
 									 [(ngModel)]="send_sms"> Manda sms
 					</label>
@@ -54,8 +56,9 @@
 		<!-- What -->
 		<div class="form-group">
 			<label for="what">Operazione prenotata</label>
-			<input type="text" class="form-control" 
+			<input type="text" class="form-control"
 						 id="what" name="what"
+						 required
 						 [(ngModel)]="what">
 		</div>
 
@@ -64,13 +67,14 @@
 			<div class="form-group col-xs-6">
 				<label for="when">Data e ora</label><br>
 				<input ng2-datetime-picker class="form-control"
-							id="when"	name="when" 
+							id="when"	name="when"
+							required
 							[(ngModel)]="appointment.when">
 			</div>
 			<!-- Where -->
 			  <div class="form-group col-xs-6">
 					<label for="where">Luogo</label>
-					<select class="form-control" 
+					<select class="form-control"
 								  id="where" name="where"
 									[(ngModel)]="appointment.where">
 						<option value="budrio">Budrio</option>
@@ -82,7 +86,7 @@
 		<!-- Notes -->
 		<div class="form-group">
 			<label for="notes">Note INTERNE</label>
-			<textarea type="text" class="form-control" rows="5" 
+			<textarea type="text" class="form-control" rows="5"
 								id="notes" name="notes"
 								[(ngModel)]="appointment.notes"></textarea>
 		</div>
@@ -93,7 +97,7 @@
 				<button class="btn btn-danger">Cancella</button>
 			</div>
 			<div class="col-xs-6 pull-right">
-				<button (click)="submit()" class="btn btn-primary">Crea</button>
+				<button class="btn btn-primary" [disabled]="!ngForm.form.valid">Crea</button>
 			</div>
 		</div>
 

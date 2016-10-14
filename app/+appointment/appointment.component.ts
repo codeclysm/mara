@@ -8,11 +8,7 @@ import { Appointment, CalendarService } from '../core/calendar.service';
 @Component({
   selector: 'mara-appointment',
   templateUrl: 'app/+appointment/appointment.component.html',
-  styles: [`
-.pull-right {
-  text-align: right;
-}
-  `]
+  styleUrls: ['app/+appointment/appointment.component.css']
 })
 export class AppointmentComponent implements OnInit {
   public appointment: Appointment;
