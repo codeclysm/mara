@@ -130,7 +130,7 @@
 		<!-- Buttons -->
 		<div class="form-group row">
 			<div class="col-xs-6">
-				<button class="btn btn-danger" (click)="back()">Cancella</button>
+				<button class="btn btn-danger" (click)="delete()">Cancella</button>
 			</div>
 			<div class="col-xs-6 pull-right">
 				<button class="btn btn-primary" *ngIf="appointment.id==''" [disabled]="!ngForm.form.valid">Crea</button>

@@ -54,8 +54,11 @@ export class AppointmentComponent implements OnInit {
     });
   }
 
-  back() {
-    this.router.navigate(['/calendar']);
+  delete() {
+    this.calendar.delete(this.appointment).subscribe(() => {
+      this.calendar.lastUpdated = '';
+      this.router.navigate(['/calendar']);
+    });
   }
 
 }

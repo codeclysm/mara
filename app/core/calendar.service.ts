@@ -83,6 +83,19 @@ export class CalendarService {
       .catch(this.handleError);
   }
 
+  delete(app: Appointment): Observable<void> {
+    let body = JSON.stringify(app);
+    let token = sessionStorage.getItem('token');
+    let headers = new Headers();
+    headers.append('Authorization', 'Bearer ' + token);
+
+    let url = 'http://api.marabinigomme.it/appointments' + '/' + app.id;
+
+    return this.http.delete(url, new RequestOptions({headers: headers}))
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
   private extractData(res: Response) {
     if (res.status < 200 || res.status >= 300) {
       throw new Error('Bad response status: ' + res.status);
