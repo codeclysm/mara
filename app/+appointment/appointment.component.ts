@@ -13,7 +13,7 @@ import { Appointment, CalendarService } from '../core/calendar.service';
 export class AppointmentComponent implements OnInit {
   public appointment: Appointment;
 
-  constructor(private route: ActivatedRoute, private router: Router, private calendar: CalendarService) {}
+  constructor(private route: ActivatedRoute, private router: Router, private calendar: CalendarService) { }
 
   ngOnInit() {
     this.route.params.forEach((params: Params) => {
@@ -34,7 +34,11 @@ export class AppointmentComponent implements OnInit {
   }
 
   submit() {
-    this.calendar.save(this.appointment).subscribe(res => this.router.navigate(['/calendar']));
-  }
+    this.calendar.save(this.appointment).subscribe((res: Appointment) => {
+      console.debug(res)
+      this.calendar.lastUpdated = res.id;
+      this.router.navigate(['/calendar']);
+    });
+}
 
 }

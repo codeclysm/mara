@@ -41,9 +41,14 @@ export class CalendarComponent implements OnInit {
   public nextWeek: string;
   public prevWeek: string;
 
+  // lastUpdated tells us that a appointment was last updated
+  public lastUpdated: string = '';
+
   ngOnInit() {
     // Ensure that the translation is correct
     Moment.locale('it');
+
+    this.lastUpdated = this.service.lastUpdated;
 
     this.route.params.forEach((params: Params) => {
       let date = Moment(params['date']);

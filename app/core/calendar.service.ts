@@ -30,6 +30,8 @@ interface ListParams {
 
 @Injectable()
 export class CalendarService {
+  public lastUpdated: string;
+
   constructor(private http: Http) { };
 
   list(params: ListParams): Promise<Appointment[]> {
@@ -62,7 +64,7 @@ export class CalendarService {
       .catch(this.handleError);
   }
 
-  save(app: Appointment): Observable<void> {
+  save(app: Appointment): Observable<Appointment> {
     let body = JSON.stringify(app);
     let token = sessionStorage.getItem('token');
     let headers = new Headers();
@@ -86,7 +88,7 @@ export class CalendarService {
       throw new Error('Bad response status: ' + res.status);
     }
     let body = res.json();
-    console.debug(body);
+    return body;
   }
 
   private handleError (error: any) {
